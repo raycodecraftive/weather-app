@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/services/api.dart';
+import 'package:weather_app/repository/weather_repository.dart';
+import 'package:weather_app/services/apiede.dart';
 
 class WeatherViewModel extends ChangeNotifier {
-  final WeatherApi _weatherApi = WeatherApi();
+  final WeatherRepository _weatherApi = WeatherRepository();
   Weather? _weather;
   bool _isLoading = false;
 
@@ -18,6 +19,7 @@ class WeatherViewModel extends ChangeNotifier {
 
     try {
       _weather = await _weatherApi.fetchWeather(city);
+      print(weather);
     } catch (e) {
       _weather = null;
       debugPrint('Error fetching weather: $e');
